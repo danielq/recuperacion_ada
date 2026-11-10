@@ -1,0 +1,17 @@
+# Postgres local opcional (desarrollo sin Neon)
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: recuperacion_ada_db
+    environment:
+      POSTGRES_USER: ada
+      POSTGRES_PASSWORD: ada123
+      POSTGRES_DB: recuperacion_ada
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./sql/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+
+volumes:
+  pgdata:
